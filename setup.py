@@ -24,11 +24,11 @@ setuptools.setup(
         'icon': 'https://raw.githubusercontent.com/ladybug-tools/artwork/master/icons_bugs/grasshopper_tabs/HB-Radiance.png',
         'docker': 'https://hub.docker.com/r/ladybugtools/honeybee-radiance-postprocess'
     },
-    description='Honeybee Radiance Postprocess plugin for Pollination.',                # will be used as package description
+    description='Honeybee Radiance Post Process plugin for Pollination.',                # will be used as package description
     long_description=long_description,                                      # will be translated to ReadMe content on Pollination
     long_description_content_type="text/markdown",
-    maintainer='mostapha, ladybug-tools',                                   # Package maintainers. For multiple maintainers use comma
-    maintainer_email='mostapha@ladybug.tools, info@ladybug.tools',
+    maintainer='mikkel, ladybug-tools',                                   # Package maintainers. For multiple maintainers use comma
+    maintainer_email='mikkel@ladybug.tools, info@ladybug.tools',
     keywords='honeybee, radiance, ladybug-tools, daylight',                 # will be used as keywords
     license='PolyForm Shield License 1.0.0, https://polyformproject.org/wp-content/uploads/2020/06/PolyForm-Shield-1.0.0.txt',  # the license link should be separated by a comma
     zip_safe=False
