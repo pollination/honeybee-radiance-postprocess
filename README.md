@@ -1,2 +1,2 @@
 # honeybee-radiance-postprocess
-Honeybee Radiance Post Processing Pollination plugin
+Honeybee Radiance Post Process plugin for developing Pollination recipes
