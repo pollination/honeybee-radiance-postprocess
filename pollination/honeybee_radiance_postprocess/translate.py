@@ -23,3 +23,20 @@ class BinaryToNpy(Function):
     output_file = Outputs.file(
         description='Output as a npy file.', path='output.npy'
         )
+
+
+@dataclass
+class TxtToNpy(Function):
+    """Convert a space or tab separated text file to npy file."""
+    txt_file = Inputs.file(
+        description='Path to txt file.', path='input.txt'
+    )
+
+    @command
+    def txt_to_npy(self):
+        return 'honeybee-radiance-postprocess translate txt-to-npy {{self.txt_file}} ' \
+            '--name output'
+
+    output_file = Outputs.file(
+        description='Output as npy file.', path='output.npy'
+    )
