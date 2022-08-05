@@ -32,7 +32,7 @@ class AnnualDaylightMetrics(Function):
     @command
     def calculate_annual_metrics(self):
         return 'honeybee-radiance-postprocess post-process annual-daylight raw_results ' \
-            '--schedule schedule.txt {{self.thresholds}} --sub_folder metrics'
+            '--schedule schedule.txt {{self.thresholds}} --sub-folder metrics'
 
     # outputs
     annual_metrics = Outputs.folder(
