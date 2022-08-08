@@ -24,8 +24,8 @@ class MergeFolderData(Function):
 
     @command
     def merge_files_in_folder(self):
-        return 'honeybee-radiance-postprocess grid merge-folder ./input_folder ./output_folder ' \
-            ' {{self.extension}} --dist-info dist_info.json'
+        return 'honeybee-radiance-postprocess grid merge-folder ./input_folder ' \
+            './output_folder {{self.extension}} --dist-info dist_info.json'
 
     output_folder = Outputs.folder(
         description='Output folder with newly generated files.', path='output_folder'

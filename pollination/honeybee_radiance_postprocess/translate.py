@@ -18,11 +18,11 @@ class BinaryToNpy(Function):
     @command
     def binary_to_npy(self):
         return 'honeybee-radiance-postprocess translate binary-to-npy ' \
-            '{{self.matrix_file}} --conversion "{{self.conversion}}" --name output'
+            '"{{self.matrix_file}}" --conversion "{{self.conversion}}" --name output'
 
     output_file = Outputs.file(
         description='Output as a npy file.', path='output.npy'
-        )
+    )
 
 
 @dataclass
