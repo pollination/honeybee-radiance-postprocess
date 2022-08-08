@@ -23,16 +23,17 @@ class AnnualDaylightMetrics(Function):
         description='A string to change the threshold for daylight autonomy and useful '
         'daylight illuminance. Valid keys are -t for daylight autonomy threshold, -lt '
         'for the lower threshold for useful daylight illuminance and -ut for the upper '
-        'threshold. The default is -t 300 -lt 100 -ut 3000. The order of the keys is not '
-        'important and you can include one or all of them. For instance if you only '
+        'threshold. The default is -t 300 -lt 100 -ut 3000. The order of the keys is not'
+        ' important and you can include one or all of them. For instance if you only '
         'want to change the upper threshold to 2000 lux you should use -ut 2000 as '
         'the input.', default='-t 300 -lt 100 -ut 3000'
     )
 
     @command
     def calculate_annual_metrics(self):
-        return 'honeybee-radiance-postprocess post-process annual-daylight raw_results ' \
-            '--schedule schedule.txt {{self.thresholds}} --sub-folder metrics'
+        return 'honeybee-radiance-postprocess post-process annual-daylight ' \
+            'raw_results --schedule schedule.txt {{self.thresholds}} ' \
+            '--sub-folder metrics'
 
     # outputs
     annual_metrics = Outputs.folder(

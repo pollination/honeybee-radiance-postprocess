@@ -28,10 +28,10 @@ class AddRemoveSkyMatrix(Function):
     @command
     def create_matrix(self):
         return 'honeybee-radiance-postprocess mtxop operate-three ' \
-            '{{self.total_sky_matrix}} {{self.direct_sky_matrix}} ' \
-            '{{self.sunlight_matrix}} --operator-one - --operator-two + ' \
+            '"{{self.total_sky_matrix}}" "{{self.direct_sky_matrix}}" ' \
+            '"{{self.sunlight_matrix}}" --operator-one - --operator-two + ' \
             '--conversion "{{self.conversion}}" --name output'
 
     results_file = Outputs.file(
         description='Results as a npy file.', path='output.npy'
-        )
+    )
