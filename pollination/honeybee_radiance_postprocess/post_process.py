@@ -38,11 +38,11 @@ class AnnualDaylightMetrics(Function):
     # outputs
     annual_metrics = Outputs.folder(
         description='Annual metrics folder. This folder includes all the other '
-        'subfolders which are also exposed as separate outputs.', path='metrics'
+        'sub-folders which are also exposed as separate outputs.', path='metrics'
     )
 
     metrics_info = Outputs.file(
-        description='A config file with metrics subfolders information for '
+        description='A config file with metrics sub-folders information for '
         'visualization. This config file is compatible with honeybee-vtk config.',
         path='metrics/config.json'
     )
