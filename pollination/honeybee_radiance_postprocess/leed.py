@@ -44,7 +44,7 @@ class DaylightOption1(Function):
     def leed_daylight_option_1(self):
         return 'honeybee-radiance-postprocess post-process leed daylight-option-1 ' \
             'results --shade-transmittance {{self.shade_transmittance}} ' \
-            '--shade-transmittance-file "{{self.shd_transmittance_file}}" ' \
+            '--shade-transmittance-file shade_transmittance.json ' \
             '--sub-folder leed_summary'
 
     # outputs
