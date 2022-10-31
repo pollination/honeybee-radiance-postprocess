@@ -1,2 +1,2 @@
 pollination-dsl==0.13.1
-honeybee-radiance-postprocess==0.4.88
+honeybee-radiance-postprocess==0.4.89
