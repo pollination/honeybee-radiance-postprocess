@@ -5,7 +5,8 @@ from pollination_dsl.function import Function, command, Inputs, Outputs
 @dataclass
 class ProcessTwoPhase(Function):
     """Multiply a matrix with conversation numbers. Output both total and
-    direct results."""
+    direct results. The direct output is the direct sunlight contribution
+    (not the direct sky contribution)."""
     total_sky_matrix = Inputs.file(
         description='Path to matrix for total sky contribution.',
         path='sky.ill', extensions=['ill', 'dc']
