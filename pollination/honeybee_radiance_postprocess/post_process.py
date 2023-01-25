@@ -41,12 +41,6 @@ class AnnualDaylightMetrics(Function):
         'sub-folders which are also exposed as separate outputs.', path='metrics'
     )
 
-    metrics_info = Outputs.file(
-        description='A config file with metrics sub-folders information for '
-        'visualization. This config file is compatible with honeybee-vtk config.',
-        path='metrics/config.json'
-    )
-
     daylight_autonomy = Outputs.folder(
         description='Daylight autonomy results.', path='metrics/da'
     )
