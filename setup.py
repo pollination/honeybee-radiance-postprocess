@@ -27,7 +27,7 @@ setuptools.setup(
     description='Honeybee Radiance Post Process plugin for Pollination.',                # will be used as package description
     long_description=long_description,                                      # will be translated to ReadMe content on Pollination
     long_description_content_type="text/markdown",
-    maintainer='mikkel, ladybug-tools',                                   # Package maintainers. For multiple maintainers use comma
+    maintainer='mikkel, ladybug-tools',                                     # Package maintainers. For multiple maintainers use comma
     maintainer_email='mikkel@ladybug.tools, info@ladybug.tools',
     keywords='honeybee, radiance, ladybug-tools, daylight',                 # will be used as keywords
     license='PolyForm Shield License 1.0.0, https://polyformproject.org/wp-content/uploads/2020/06/PolyForm-Shield-1.0.0.txt',  # the license link should be separated by a comma
