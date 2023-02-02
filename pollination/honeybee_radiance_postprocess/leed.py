@@ -3,7 +3,7 @@ from pollination_dsl.function import Function, command, Inputs, Outputs
 
 
 @dataclass
-class DaylightOption1(Function):
+class DaylightOptionOne(Function):
     """Calculate credits for LEED v4.1 Daylight Option 1.
 
     Use the shade-transmittance option to set a shade transmittance values for
@@ -41,8 +41,8 @@ class DaylightOption1(Function):
     )
 
     @command
-    def leed_daylight_option_1(self):
-        return 'honeybee-radiance-postprocess post-process leed daylight-option-1 ' \
+    def leed_daylight_option_one(self):
+        return 'honeybee-radiance-postprocess post-process leed daylight-option-one ' \
             'results --shade-transmittance {{self.shade_transmittance}} ' \
             '--shade-transmittance-file shade_transmittance.json ' \
             '--sub-folder leed_summary'
