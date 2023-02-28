@@ -24,7 +24,7 @@ setuptools.setup(
         'icon': 'https://raw.githubusercontent.com/ladybug-tools/artwork/master/icons_bugs/grasshopper_tabs/HB-Radiance.png',
         'docker': 'https://hub.docker.com/r/ladybugtools/honeybee-radiance-postprocess'
     },
-    description='Honeybee Radiance Post Process plugin for Pollination.',              # will be used as package description
+    description='Honeybee Radiance Post Process plugin for Pollination.',             # will be used as package description
     long_description=long_description,                                      # will be translated to ReadMe content on Pollination
     long_description_content_type="text/markdown",
     maintainer='mikkel, ladybug-tools',                                     # Package maintainers. For multiple maintainers use comma
