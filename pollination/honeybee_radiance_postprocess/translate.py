@@ -40,3 +40,20 @@ class TxtToNpy(Function):
     output_file = Outputs.file(
         description='Output as npy file.', path='output.npy'
     )
+
+
+@dataclass
+class NpyToTxt(Function):
+    """Convert a npy file to text file."""
+    npy_file = Inputs.file(
+        description='Path to npy file.', path='input.npy'
+    )
+
+    @command
+    def npy_to_txt(self):
+        return 'honeybee-radiance-postprocess translate npy-to-txt input.npy ' \
+            '--name output'
+
+    output_file = Outputs.file(
+        description='Output as a text file.', path='output.txt'
+    )
