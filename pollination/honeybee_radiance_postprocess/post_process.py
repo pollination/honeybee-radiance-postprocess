@@ -92,16 +92,10 @@ class AnnualDaylightEN17037Metrics(Function):
         'subfolders which are also exposed as separate outputs.', path='metrics'
     )
 
-    metrics_info = Outputs.file(
-        description='A config file with metrics subfolders information for '
-        'visualization. This config file is compatible with honeybee-vtk config.',
-        path='metrics/config.json'
+    daylight_autonomy = Outputs.folder(
+        description='Daylight autonomy results.', path='metrics/da'
     )
 
-    target_illuminance = Outputs.folder(
-        description='Target illuminance results.', path='metrics/target_illuminance'
-    )
-
-    minimum_illuminance = Outputs.folder(
-        description='Minimum illuminance results.', path='metrics/minimum_illuminance'
+    spatial_daylight_autonomy = Outputs.folder(
+        description='Spatial daylight autonomy results.', path='metrics/sda'
     )
