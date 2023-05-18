@@ -30,3 +30,27 @@ class MergeFolderData(Function):
     output_folder = Outputs.folder(
         description='Output folder with newly generated files.', path='output_folder'
     )
+
+
+@dataclass
+class MergeFolderMetrics(Function):
+    """Restructure annual daylight metrics in a distributed folder."""
+
+    input_folder = Inputs.folder(
+        description='Input sensor grids folder.',
+        path='input_folder'
+    )
+
+    dist_info = Inputs.file(
+        description='Distribution information file.',
+        path='dist_info.json', optional=True
+    )
+
+    @command
+    def merge_files_in_folder(self):
+        return 'honeybee-radiance-postprocess grid merge-folder-metrics ' \
+            './input_folder ./output_folder --dist-info dist_info.json'
+
+    output_folder = Outputs.folder(
+        description='Output folder with newly generated files.', path='output_folder'
+    )
