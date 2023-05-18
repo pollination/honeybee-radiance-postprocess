@@ -65,7 +65,7 @@ class AnnualDaylightMetrics(Function):
 
 
 @dataclass
-class AnnualDaylightEN17037Metrics(Function):
+class AnnualDaylightEn17037Metrics(Function):
     """Calculate annual daylight EN 173037 metrics for annual daylight simulation."""
 
     folder = Inputs.folder(
@@ -98,4 +98,75 @@ class AnnualDaylightEN17037Metrics(Function):
 
     spatial_daylight_autonomy = Outputs.folder(
         description='Spatial daylight autonomy results.', path='metrics/sda'
+    )
+
+
+@dataclass
+class AnnualDaylightMetricsFile(Function):
+    """Calculate annual daylight metrics for a single file."""
+
+    file = Inputs.file(
+        description='Annual illuminance file. This can be either a NumPy file '
+        'or a binary Radiance file.',
+        path='illuminance.ill'
+    )
+
+    sun_up_hours = Inputs.file(
+        description='A text file that includes all the sun up hours. Each '
+        'hour is separated by a new line.', path='sun-up-hours.txt'
+    )
+
+    schedule = Inputs.file(
+        description='Path to an annual schedule file. Values should be 0-1 separated '
+        'by new line. If not provided an 8-5 annual schedule will be created.',
+        path='schedule.txt', optional=True
+    )
+
+    thresholds = Inputs.str(
+        description='A string to change the threshold for daylight autonomy and useful '
+        'daylight illuminance. Valid keys are -t for daylight autonomy threshold, -lt '
+        'for the lower threshold for useful daylight illuminance and -ut for the upper '
+        'threshold. The default is -t 300 -lt 100 -ut 3000. The order of the keys is not'
+        ' important and you can include one or all of them. For instance if you only '
+        'want to change the upper threshold to 2000 lux you should use -ut 2000 as '
+        'the input.', default='-t 300 -lt 100 -ut 3000'
+    )
+
+    grid_name = Inputs.str(
+        description='Optional name of each metric file.', default='grid'
+    )
+
+    @command
+    def calculate_annual_metrics_file(self):
+        return 'honeybee-radiance-postprocess post-process annual-daylight-file ' \
+            'illuminance.ill sun-up-hours.txt --schedule schedule.txt ' \
+            '{{self.thresholds}} --grid-name "{{self.grid_name}}" ' \
+            '--sub-folder metrics'
+
+    # outputs
+    annual_metrics = Outputs.folder(
+        description='Annual metrics folder. This folder includes all the other '
+        'sub-folders which are also exposed as separate outputs.', path='metrics'
+    )
+
+    daylight_autonomy = Outputs.folder(
+        description='Daylight autonomy results.', path='metrics/da'
+    )
+
+    continuous_daylight_autonomy = Outputs.folder(
+        description='Continuous daylight autonomy results.', path='metrics/cda'
+    )
+
+    useful_daylight_illuminance_lower = Outputs.folder(
+        description='Lower useful daylight illuminance results.',
+        path='metrics/udi_lower'
+    )
+
+    useful_daylight_illuminance = Outputs.folder(
+        description='Useful daylight illuminance results.', path='metrics/udi'
+    )
+
+    useful_daylight_illuminance_upper = Outputs.folder(
+        description='Upper useful daylight illuminance results.',
+        path='metrics/udi_upper'
     )
