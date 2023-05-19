@@ -46,10 +46,16 @@ class MergeFolderMetrics(Function):
         path='dist_info.json', optional=True
     )
 
+    grids_info = Inputs.file(
+        description='Grid information file.',
+        path='grids_info.json', optional=True
+    )
+
     @command
-    def merge_files_in_folder(self):
+    def merge_metrics_in_folder(self):
         return 'honeybee-radiance-postprocess grid merge-folder-metrics ' \
-            './input_folder ./output_folder --dist-info dist_info.json'
+            './input_folder ./output_folder --dist-info dist_info.json ' \
+            '--grids-info grids_info.json'
 
     output_folder = Outputs.folder(
         description='Output folder with newly generated files.', path='output_folder'
