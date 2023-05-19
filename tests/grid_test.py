@@ -1,7 +1,8 @@
 from pathlib import Path
 from shutil import rmtree
 
-from pollination.honeybee_radiance_postprocess.grid import MergeFolderData
+from pollination.honeybee_radiance_postprocess.grid import MergeFolderData, \
+    MergeFolderMetrics
 
 from queenbee.plugin.function import Function
 
@@ -10,6 +11,13 @@ def test_merge_folder_data_function():
     function = MergeFolderData()
     qb_function = function.queenbee
     assert qb_function.name == 'merge-folder-data'
+    assert isinstance(qb_function, Function)
+
+
+def test_merge_folder_metrics_function():
+    function = MergeFolderMetrics()
+    qb_function = function.queenbee
+    assert qb_function.name == 'merge-folder-metrics'
     assert isinstance(qb_function, Function)
 
 
