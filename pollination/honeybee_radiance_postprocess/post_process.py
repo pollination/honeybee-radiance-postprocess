@@ -170,3 +170,49 @@ class AnnualDaylightMetricsFile(Function):
         description='Upper useful daylight illuminance results.',
         path='metrics/udi_upper'
     )
+
+
+@dataclass
+class GridSummaryMetrics(Function):
+    """Calculate grid summary for metrics."""
+
+    folder = Inputs.folder(
+        description='A folder with metrics.',
+        path='metrics'
+    )
+
+    model = Inputs.file(
+        description='Path to HBJSON file. The purpose of the model in this function is '
+        'to use the mesh area of the sensor grids to calculate area-weighted metrics. '
+        'In case no model is provided or the sensor grids in the model do not have any '
+        'mesh area, it will be assumed that all sensor points cover the same area.',
+        path='model.hbjson', optional=True
+    )
+
+    grids_info = Inputs.file(
+        description='A JSON file with grid information.',
+        path='grids_info.json', extensions=['json'], optional=True
+    )
+
+    grid_metrics = Inputs.file(
+        description='A JSON file with additional custom metrics to calculate.',
+        path='grid_metrics.json', extensions=['json'], optional=True
+    )
+
+    folder_level = Inputs.str(
+        description='Use sub-folder to loop over all sub folders. Use '
+        'main-folder if the metrics are in the main directory.',
+        spec={'type': 'string', 'enum': ['sub-folder', 'main-folder']},
+        default='sub-folder'
+    )
+
+    @command
+    def grid_summary_metrics(self):
+        return 'honeybee-radiance-postprocess post-process grid-summary ' \
+            'metrics --model model.hbjson --grids-info grids_info.json ' \
+            '--grid-metrics grid_metrics.json --{{self.folder_level}}'
+
+    # outputs
+    grid_summary = Outputs.file(
+        description='Grid summary as csv file.', path='metrics/grid_summary.csv'
+    )
