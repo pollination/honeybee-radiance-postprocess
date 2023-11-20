@@ -221,3 +221,40 @@ class GridSummaryMetrics(Function):
     grid_summary = Outputs.file(
         description='Grid summary as csv file.', path='metrics/grid_summary.csv'
     )
+
+
+@dataclass
+class AnnualIrradianceMetrics(Function):
+    """Calculate annual daylight metrics for annual daylight simulation."""
+
+    folder = Inputs.folder(
+        description='This folder is an output folder of annual daylight recipe. Folder '
+        'should include grids_info.json and sun-up-hours.txt. The command uses the list '
+        'in grids_info.json to find the result files for each sensor grid.',
+        path='raw_results'
+    )
+
+    @command
+    def calculate_annual_irradiance_metrics(self):
+        return 'honeybee-radiance-postprocess post-process annual-irradiance ' \
+            'raw_results ' \
+            '--sub-folder metrics'
+
+    # outputs
+    annual_metrics = Outputs.folder(
+        description='Annual metrics folder. This folder includes all the other '
+        'sub-folders which are also exposed as separate outputs.', path='metrics'
+    )
+
+    average_irradiance = Outputs.folder(
+        description='Daylight autonomy results.', path='metrics/average_irradiance'
+    )
+
+    peak_irradiance = Outputs.folder(
+        description='Continuous daylight autonomy results.', path='metrics/peak_irradiance'
+    )
+
+    cumulative_radiation = Outputs.folder(
+        description='Lower useful daylight illuminance results.',
+        path='metrics/cumulative_radiation'
+    )
