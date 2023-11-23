@@ -138,7 +138,7 @@ class AnnualDaylightMetricsFile(Function):
 
     study_info = Inputs.file(
         description='Optional study info file. This option is needed if the '
-        'time step is larger than 1.', optional=True
+        'time step is larger than 1.', path='study_info.json', optional=True
     )
 
     @command
@@ -146,7 +146,7 @@ class AnnualDaylightMetricsFile(Function):
         return 'honeybee-radiance-postprocess post-process annual-daylight-file ' \
             'illuminance.ill sun-up-hours.txt --schedule schedule.txt ' \
             '{{self.thresholds}} --grid-name "{{self.grid_name}}" ' \
-            '--study-info {{self.study_info}} --sub-folder metrics'
+            '--study-info study_info.json --sub-folder metrics'
 
     # outputs
     annual_metrics = Outputs.folder(

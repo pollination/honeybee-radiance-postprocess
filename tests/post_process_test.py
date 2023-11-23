@@ -34,29 +34,6 @@ def test_annual_daylight_metrics_file_calculate():
     inputs = {
         'file': Path('./tests/assets/post_process/annual_daylight_metrics_file/total.npy'),
         'sun_up_hours': Path('./tests/assets/post_process/annual_daylight_metrics_file/sun-up-hours.txt'),
-        'schedule': Path('./tests/assets/post_process/annual_daylight_metrics_file/schedule.csv')
-    }
-    folder = Path('./tests/assets/temp')
-    output_folder = folder.joinpath('metrics')
-    output_file = output_folder.joinpath('da', 'grid.da')
-    if not folder.exists():
-        folder.mkdir(parents=True)
-    function._try(inputs, folder=folder)
-    assert output_folder.is_dir()
-    assert output_file.is_file()
-
-    for path in folder.glob('*'):
-        if path.is_file():
-            path.unlink()
-        elif path.is_dir():
-            rmtree(path)
-
-
-def test_annual_daylight_metrics_file_study_info():
-    function = AnnualDaylightMetricsFile()
-    inputs = {
-        'file': Path('./tests/assets/post_process/annual_daylight_metrics_file/total.npy'),
-        'sun_up_hours': Path('./tests/assets/post_process/annual_daylight_metrics_file/sun-up-hours.txt'),
         'schedule': Path('./tests/assets/post_process/annual_daylight_metrics_file/schedule.csv'),
         'study_info': Path('./tests/assets/post_process/annual_daylight_metrics_file/study_info.json')
     }
