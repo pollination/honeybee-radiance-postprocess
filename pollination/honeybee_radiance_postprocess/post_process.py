@@ -136,12 +136,17 @@ class AnnualDaylightMetricsFile(Function):
         description='Optional name of each metric file.', default='grid'
     )
 
+    study_info = Inputs.file(
+        description='Optional study info file. This option is needed if the '
+        'time step is larger than 1.', optional=True
+    )
+
     @command
     def calculate_annual_metrics_file(self):
         return 'honeybee-radiance-postprocess post-process annual-daylight-file ' \
             'illuminance.ill sun-up-hours.txt --schedule schedule.txt ' \
             '{{self.thresholds}} --grid-name "{{self.grid_name}}" ' \
-            '--sub-folder metrics'
+            '--study-info {{self.study_info}} --sub-folder metrics'
 
     # outputs
     annual_metrics = Outputs.folder(
