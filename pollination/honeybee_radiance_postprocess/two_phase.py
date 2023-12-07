@@ -38,7 +38,7 @@ class ProcessTwoPhase(Function):
 
 
 @dataclass
-class AddRemoveSkyMatrix(Function):
+class TwoPhaseAddRemoveSkyMatrix(Function):
     """Remove direct sky from total sky and add direct sun. Output both total and
     direct results. The direct output is the direct sunlight contribution
     (not the direct sky contribution)."""
