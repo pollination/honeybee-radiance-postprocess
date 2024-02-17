@@ -259,3 +259,38 @@ class AnnualIrradianceMetrics(Function):
         description='The cumulative radiation in kWh/m2 for each sensor over '
         'the wea period.', path='metrics/cumulative_radiation'
     )
+
+
+@dataclass
+class DirectSunHours(Function):
+    """Calculate direct sun hours and cumulative direct sun hours.."""
+
+    input_mtx = Inputs.file(
+        description='Annual direct sun hours file. This can be either a NumPy '
+        'file or a binary Radiance file.',
+        path='direct_matrix.mtx'
+    )
+
+    divisor = Inputs.int(
+        description='An optional number, that the summed row will be divided '
+        'by. For example, this can be a timestep, which can be used to ensure '
+        'that a summed row of irradiance yields cumulative radiation over the '
+        'entire time period of the matrix.',
+        default=1
+    )
+
+    @command
+    def calculate_direct_sun_hours(self):
+        return 'honeybee-radiance-postprocess post-process direct-sun-hours ' \
+            'direct_matrix.mtx --divisor {{self.divisor}}'
+
+    # outputs
+    direct_sun_hours = Outputs.file(
+        description='Direct sun hours as a NumPy file.',
+        path='direct_sun_hours.npy'
+    )
+
+    cumulative_direct_sun_hours = Outputs.file(
+        description='Cumulative direct sun hours as a text file.',
+        path='cumulative.res'
+    )

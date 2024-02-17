@@ -22,10 +22,34 @@ class MergeFolderData(Function):
         path='dist_info.json', optional=True
     )
 
+    output_extension = Inputs.str(
+        description='Output file extension. This is only used if as_text is set '
+        'to True. Otherwise the output extension will be npy.', default='ill'
+    )
+
+    as_text = Inputs.bool(
+        description='Set to True if the output files should be saved as text '
+        'instead of NumPy files.', default=False
+    )
+
+    fmt = Inputs.str(
+        description='Format for the output files when saved as text.',
+        default='%.2f'
+    )
+
+    delimiter = Inputs.str(
+        description='Delimiter for the output files when saved as text.',
+        spec={"enum": ["space", "tab"]}, default='tab'
+
+    )
+
     @command
     def merge_files_in_folder(self):
         return 'honeybee-radiance-postprocess grid merge-folder ./input_folder ' \
-            './output_folder {{self.extension}} --dist-info dist_info.json'
+            './output_folder {{self.extension}} --dist-info dist_info.json ' \
+            '--output-extension {{self.output_extension}} --as-text {{self.as_text}} ' \
+            '--fmt {{self.fmt}} --delimiter {{self.delimiter}}'
+
 
     output_folder = Outputs.folder(
         description='Output folder with newly generated files.', path='output_folder'
