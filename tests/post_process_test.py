@@ -60,7 +60,7 @@ def test_annual_irradiance_metrics():
     }
     folder = Path('./tests/assets/temp')
     output_folder = folder.joinpath('metrics')
-    output_file = output_folder.joinpath('average_irradiance', 'TestRoom_1.average')
+    output_file = output_folder.joinpath('average_irradiance', 'TestRoom_1.res')
     if not folder.exists():
         folder.mkdir(parents=True)
     function._try(inputs, folder=folder)
