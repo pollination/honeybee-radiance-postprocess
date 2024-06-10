@@ -4,27 +4,21 @@ from pollination_dsl.function import Function, command, Inputs, Outputs
 
 @dataclass
 class AbntNbr15575Daylight(Function):
-    """Calculate credits for LEED v4.1 Daylight Option 1.
-
-    Use the shade-transmittance option to set a shade transmittance values for
-    aperture groups. The shade-transmittance-file option takes precedence over
-    the shade-transmittance, however, if any aperture groups are missing in the
-    JSON file given to the shade-transmittance-file option, the value from
-    shade-transmittance will be used for those aperture groups.
-    """
+    """Post-processing for ABNT NBR 15575."""
 
     folder = Inputs.folder(
-        description='This folder is an output folder of annual daylight recipe. Folder '
-        'should include grids_info.json and sun-up-hours.txt. The command uses the list '
-        'in grids_info.json to find the result files for each sensor grid.',
+        description='Simulation folder for a ABNT NBR 15575 simulation. It '
+        'should contain four sub-folder of complete point-in-time illuminance '
+        'simulations labeled "4_930AM", "4_330PM", "10_930AM", and "10_330PM". '
+        'These sub-folder should each have results folder that include a '
+        'grids_info.json and .res files with illuminance values for each sensor.',
         path='results'
     )
 
     model = Inputs.file(
-        description='Path to HBJSON file. The purpose of the model in this function is '
-        'to use the mesh area of the sensor grids to calculate area-weighted metrics. '
-        'In case no model is provided or the sensor grids in the model do not have any '
-        'mesh area, it will be assumed that all sensor points cover the same area.',
+        description='Path to HBJSON file. This file is used to extract the '
+        'center points of the sensor grids. It is a requirement that the sensor '
+        'grids have Meshes.',
         path='model.hbjson'
     )
 
@@ -35,7 +29,18 @@ class AbntNbr15575Daylight(Function):
 
     # outputs
     abnt_nbr_15575 = Outputs.folder(
-        description='Annual metrics folder. This folder includes all the other '
-        'sub-folders which are also exposed as separate outputs.',
+        description='Folder with the ABNT NBR 15575 post-processing.',
         path='abnt_nbr_15575'
+    )
+
+    abnt_nbr_15575_summary = Outputs.file(
+        description='JSON file containing the illuminance criteria level and '
+        'the illuminance at the center of the sensor grid.',
+        path='abnt_nbr_15575/abnt_nbr_15575.json'
+    )
+
+    illuminance_levels = Outputs.folder(
+        description='A folder where illuminance results are mapped to an integer '
+        'value noting the illuminance level. There are four different levels.',
+        path='abnt_nbr_15575/illuminance_levels'
     )
