@@ -34,16 +34,16 @@ class AbntNbr15575Daylight(Function):
     )
 
     abnt_nbr_15575_summary = Outputs.file(
-        description='JSON file containing the illuminance level and the '
+        description='CSV file containing the illuminance level and the '
         'illuminance at the center of the sensor grid.',
-        path='abnt_nbr_15575/abnt_nbr_15575.json'
+        path='abnt_nbr_15575/abnt_nbr_15575_rooms.csv'
     )
 
-    abnt_nbr_15575_summary_rooms = Outputs.file(
+    center_points = Outputs.file(
         description='JSON file containing the illuminance level and the '
         'illuminance at the center of the sensor grid. This is the lowest '
         'illuminance and level across the four point-in-time simulations.',
-        path='abnt_nbr_15575/abnt_nbr_15575_rooms.json'
+        path='abnt_nbr_15575/center_points.json'
     )
 
     illuminance_levels = Outputs.folder(
