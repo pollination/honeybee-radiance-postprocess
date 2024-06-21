@@ -22,10 +22,25 @@ class AbntNbr15575Daylight(Function):
         path='model.hbjson'
     )
 
+    ground_level = Inputs.float(
+        description='A value to define the height of the ground level. This '
+        'will make sure that rooms below this height will not be counted as '
+        'ground level rooms',
+        default=0
+    )
+
+    room_center = Inputs.str(
+        default='room',
+        description='An input to indicate if the evaluation of the center is at '
+        'the center of the room or the center of the grid.',
+        spec={'type': 'string', 'enum': ['room', 'grid']}
+    )
+
     @command
     def abnt_nbr_15575_daylight(self):
         return 'honeybee-radiance-postprocess post-process abnt abnt-nbr-15575 ' \
-            'results model.hbjson --sub-folder abnt_nbr_15575'
+            'results model.hbjson --ground-level {{self.ground_level}} ' \
+            '--{{self.room_center}}-center --sub-folder abnt_nbr_15575'
 
     # outputs
     abnt_nbr_15575 = Outputs.folder(
@@ -34,16 +49,16 @@ class AbntNbr15575Daylight(Function):
     )
 
     abnt_nbr_15575_summary = Outputs.file(
-        description='CSV file containing the illuminance level and the '
+        description='JSON file containing the illuminance level and the '
         'illuminance at the center of the sensor grid.',
-        path='abnt_nbr_15575/abnt_nbr_15575_rooms.csv'
+        path='abnt_nbr_15575/abnt_nbr_15575.json'
     )
 
-    center_points = Outputs.file(
+    abnt_nbr_15575_summary_rooms = Outputs.file(
         description='JSON file containing the illuminance level and the '
         'illuminance at the center of the sensor grid. This is the lowest '
         'illuminance and level across the four point-in-time simulations.',
-        path='abnt_nbr_15575/center_points.json'
+        path='abnt_nbr_15575/abnt_nbr_15575_rooms.json'
     )
 
     illuminance_levels = Outputs.folder(
