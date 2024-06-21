@@ -51,7 +51,7 @@ class AbntNbr15575Daylight(Function):
     abnt_nbr_15575_summary = Outputs.file(
         description='CSV file containing the illuminance level and the '
         'illuminance at the center of the sensor grid.',
-        path='abnt_nbr_15575/abnt_nbr_15575.csv'
+        path='abnt_nbr_15575/abnt_nbr_15575_rooms.csv'
     )
 
     center_points = Outputs.file(
