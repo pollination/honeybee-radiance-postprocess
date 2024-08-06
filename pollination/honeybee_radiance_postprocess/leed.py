@@ -28,7 +28,7 @@ class DaylightOptionOne(Function):
 
     shade_transmittance = Inputs.float(
         description='A value to use as a multiplier in place of solar shading. Value '
-        'for shade transmittance must be 1 > value > 0.', default=0.2
+        'for shade transmittance must be 1 > value > 0.', default=0.02
     )
 
     shd_transmittance_file = Inputs.file(
