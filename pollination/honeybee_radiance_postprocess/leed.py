@@ -38,6 +38,15 @@ class DaylightOptionOne(Function):
         path='shade_transmittance.json', extensions=['json'], optional=True
     )
 
+    blind_postprocess = Inputs.str(
+        description='A flag to select if the post-processing should use a '
+        'shade transmittance or the simulated states of aperture groups. Using '
+        'states should only be selected if the annual daylight simulation '
+        'included ray tracing of a second (blind) state for each aperture group.',
+        default='shade-transmittance',
+        spec={'type': 'string', 'enum': ['shade-transmittance', 'states']}
+    )
+
     model = Inputs.file(
         description='Path to HBJSON file. The purpose of the model in this function is '
         'to use the mesh area of the sensor grids to calculate area-weighted metrics. '
@@ -51,7 +60,7 @@ class DaylightOptionOne(Function):
         return 'honeybee-radiance-postprocess post-process leed daylight-option-one ' \
             'results --shade-transmittance {{self.shade_transmittance}} ' \
             '--shade-transmittance-file shade_transmittance.json ' \
-            '--sub-folder leed_summary'
+            '--use-{{self.blind_postprocess}} --sub-folder leed_summary'
 
     # outputs
     leed_summary = Outputs.folder(
