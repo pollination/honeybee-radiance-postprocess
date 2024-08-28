@@ -13,7 +13,7 @@ def test_annual_daylight_metrics():
     qb_function = function.queenbee
     assert qb_function.name == 'annual-daylight-metrics'
     assert isinstance(qb_function, Function)
-    
+
 
 def test_annual_daylight_en17037_metrics():
     function = AnnualDaylightEn17037Metrics()
@@ -60,7 +60,8 @@ def test_annual_irradiance_metrics():
     }
     folder = Path('./tests/assets/temp')
     output_folder = folder.joinpath('metrics')
-    output_file = output_folder.joinpath('average_irradiance', 'TestRoom_1.res')
+    output_file = output_folder.joinpath(
+        'average_irradiance', 'TestRoom_1.res')
     if not folder.exists():
         folder.mkdir(parents=True)
     function._try(inputs, folder=folder)
