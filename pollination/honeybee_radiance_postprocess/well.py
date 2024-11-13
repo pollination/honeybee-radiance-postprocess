@@ -4,7 +4,7 @@ from pollination_dsl.function import Function, command, Inputs, Outputs
 
 @dataclass
 class WellAnnualDaylight(Function):
-    """Calculate credits for WELL L06."""
+    """Calculate credits for WELL L06 and L01."""
 
     folder = Inputs.folder(
         description='This folder is an output folder of annual daylight recipe. Folder '
@@ -33,8 +33,14 @@ class WellAnnualDaylight(Function):
             'results --use-states --sub-folder well_summary'
 
     # outputs
-    well_summary = Outputs.folder(
-        description='WELL summary folder. This folder includes all the other '
+    l06_well_summary = Outputs.folder(
+        description='WELL L06 summary folder. This folder includes all the other '
         'sub-folders which are also exposed as separate outputs.',
-        path='well_summary'
+        path='l06_well_summary'
+    )
+
+    l01_well_summary = Outputs.folder(
+        description='WELL L01 summary folder. This folder includes all the other '
+        'sub-folders which are also exposed as separate outputs.',
+        path='l01_well_summary'
     )
