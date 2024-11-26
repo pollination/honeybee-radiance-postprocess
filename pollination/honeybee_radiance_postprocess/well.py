@@ -27,20 +27,39 @@ class WellAnnualDaylight(Function):
         path='model.hbjson', optional=True
     )
 
+    daylight_hours = Inputs.file(
+        description='Path to an annual schedule file. Values should be 0-1 separated '
+        'by new line. This should be a daylight hours schedule according to EN 17037.',
+        path='daylight_hours.txt'
+    )
+
     @command
     def well_annual_daylight(self):
         return 'honeybee-radiance-postprocess post-process well well-annual-daylight ' \
-            'results --use-states --sub-folder well_summary'
+            'results daylight_hours.txt --sub-folder well_summary'
 
     # outputs
-    l06_well_summary = Outputs.folder(
-        description='WELL L06 summary folder. This folder includes all the other '
-        'sub-folders which are also exposed as separate outputs.',
-        path='l06_well_summary'
+    well_summary_folder = Outputs.folder(
+        description='WELL summary folder.',
+        path='well_summary'
     )
 
-    l01_well_summary = Outputs.folder(
-        description='WELL L01 summary folder. This folder includes all the other '
-        'sub-folders which are also exposed as separate outputs.',
-        path='l01_well_summary'
+    ies_lm_folder = Outputs.folder(
+        description='IES LM summary folder.',
+        path='well_summary/ies_lm'
+    )
+
+    en17037_folder = Outputs.folder(
+        description='EN 17037 summary folder.',
+        path='well_summary/en17037'
+    )
+
+    l01_well_summary = Outputs.file(
+        description='L01 WELL summary.',
+        path='well_summary/l01_well_summary.json'
+    )
+
+    l06_well_summary = Outputs.file(
+        description='L06 WELL summary.',
+        path='well_summary/l06_well_summary.json'
     )
