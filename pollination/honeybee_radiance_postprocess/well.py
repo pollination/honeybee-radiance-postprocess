@@ -63,3 +63,24 @@ class WellAnnualDaylight(Function):
         description='L06 WELL summary.',
         path='well_summary/l06_well_summary.json'
     )
+
+
+@dataclass
+class WellDaylightVisMetadata(Function):
+    """Create visualization metadata files for WELL Daylight."""
+
+    output_folder = Inputs.str(
+        description='Name of the output folder.', default='visualization',
+        path='visualization'
+    )
+
+    @command
+    def create_well_daylight_vis_data(self):
+        return 'honeybee-radiance-postprocess post-process well well-daylight-vis-metadata ' \
+            '--output-folder "{{self.output_folder}}"'
+
+    # outputs
+    vis_metadata_folder = Outputs.folder(
+        description='Output folder with visualization metadata files.',
+        path='visualization'
+    )
