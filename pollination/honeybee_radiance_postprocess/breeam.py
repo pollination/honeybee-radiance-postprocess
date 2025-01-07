@@ -31,3 +31,24 @@ class Breeam4b(Function):
         description='BREEAM summary folder.',
         path='breeam_summary'
     )
+
+
+@dataclass
+class Breeam4bVisMetadata(Function):
+    """Create visualization metadata files for BREEAM 4b."""
+
+    output_folder = Inputs.str(
+        description='Name of the output folder.', default='visualization',
+        path='visualization'
+    )
+
+    @command
+    def create_well_daylight_vis_data(self):
+        return 'honeybee-radiance-postprocess post-process breeam breeam-4b-vis-metadata ' \
+            '--output-folder "{{self.output_folder}}"'
+
+    # outputs
+    vis_metadata_folder = Outputs.folder(
+        description='Output folder with visualization metadata files.',
+        path='visualization'
+    )
