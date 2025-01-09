@@ -68,3 +68,24 @@ class DaylightOptionOne(Function):
         'sub-folders which are also exposed as separate outputs.',
         path='leed_summary'
     )
+
+
+@dataclass
+class DaylightOptionOneVisMetadata(Function):
+    """Create visualization metadata files for LEED Daylight Option I."""
+
+    output_folder = Inputs.str(
+        description='Name of the output folder.', default='visualization',
+        path='visualization'
+    )
+
+    @command
+    def create_daylight_option_one_vis_data(self):
+        return 'honeybee-radiance-postprocess post-process leed leed-daylight-option-one-vis-metadata ' \
+            '--output-folder "{{self.output_folder}}"'
+
+    # outputs
+    vis_metadata_folder = Outputs.folder(
+        description='Output folder with visualization metadata files.',
+        path='visualization'
+    )
