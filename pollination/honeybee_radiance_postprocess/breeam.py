@@ -22,7 +22,7 @@ class Breeam4b(Function):
     )
 
     @command
-    def well_annual_daylight(self):
+    def breeam_daylight_4b(self):
         return 'honeybee-radiance-postprocess post-process breeam breeam-4b ' \
             'results --model-file model.hbjson --sub-folder breeam_summary'
 
@@ -43,7 +43,7 @@ class Breeam4bVisMetadata(Function):
     )
 
     @command
-    def create_well_daylight_vis_data(self):
+    def create_breeam_daylight_4b_vis_data(self):
         return 'honeybee-radiance-postprocess post-process breeam breeam-4b-vis-metadata ' \
             '--output-folder "{{self.output_folder}}"'
 
