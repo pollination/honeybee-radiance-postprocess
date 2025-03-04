@@ -21,10 +21,19 @@ class Breeam4b(Function):
         path='model.hbjson', optional=True
     )
 
+    grid_filter = Inputs.str(
+        description='Text for a grid identifier or a pattern to filter the sensor grids '
+        'of the model that are simulated. For instance, first_floor_* will simulate '
+        'only the sensor grids that have an identifier that starts with '
+        'first_floor_. By default, all grids in the model will be simulated.',
+        default='*'
+    )
+
     @command
     def breeam_daylight_4b(self):
         return 'honeybee-radiance-postprocess post-process breeam breeam-4b ' \
-            'results --model-file model.hbjson --sub-folder breeam_summary'
+            'results --model-file model.hbjson --grids-filter " {{self.grid_filter}} " ' \
+            '--sub-folder breeam_summary'
 
     # outputs
     breeam_summary = Outputs.folder(
