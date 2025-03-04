@@ -22,7 +22,9 @@ class DaylightOptionOne(Function):
 
     grid_filter = Inputs.str(
         description='Text for a grid identifier or a pattern to filter the sensor grids '
-        'of the model.',
+        'of the model that are simulated. For instance, first_floor_* will simulate '
+        'only the sensor grids that have an identifier that starts with '
+        'first_floor_. By default, all grids in the model will be simulated.',
         default='*'
     )
 
@@ -58,7 +60,8 @@ class DaylightOptionOne(Function):
     @command
     def leed_daylight_option_one(self):
         return 'honeybee-radiance-postprocess post-process leed daylight-option-one ' \
-            'results --shade-transmittance {{self.shade_transmittance}} ' \
+            'results --grids-filter " {{self.grid_filter}} " ' \
+            '--shade-transmittance {{self.shade_transmittance}} ' \
             '--shade-transmittance-file shade_transmittance.json ' \
             '--use-{{self.blind_postprocess}} --sub-folder leed_summary'
 
