@@ -72,9 +72,11 @@ jobs:
       - name: set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'
+          python-version: '3.12'
       - name: install python dependencies
-        run: pip install pollination-honeybee-radiance-postprocess
+        run: |
+          pip install -r dev-requirements.txt
+          pip install pollination-honeybee-radiance-postprocess
       - name: deploy to production
         run: |
           queenbee
