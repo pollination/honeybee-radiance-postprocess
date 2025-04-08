@@ -22,11 +22,19 @@ class ProcessTwoPhase(Function):
         path='sun.ill', extensions=['ill', 'dc']
     )
 
+    dtype = Inputs.str(
+        description='Switch between float32 and float 16 data type. Default '
+        'is float32.',
+        spec={'type': 'string', 'enum': ['float32', 'float16']},
+        default='float32'
+    )
+
     @command
     def process_two_phase(self):
         return 'honeybee-radiance-postprocess post-process two-phase ' \
             'rgb-to-illuminance "{{self.total_sky_matrix}}" ' \
             '"{{self.direct_sky_matrix}}" "{{self.sunlight_matrix}}"' \
+            '--{{self.dtype}}'
 
     total = Outputs.file(
         description='Total results as a npy file.', path='total.npy'
@@ -57,11 +65,19 @@ class TwoPhaseAddRemoveSkyMatrix(Function):
         path='sun.ill', extensions=['ill', 'dc']
     )
 
+    dtype = Inputs.str(
+        description='Switch between float32 and float 16 data type. Default '
+        'is float32.',
+        spec={'type': 'string', 'enum': ['float32', 'float16']},
+        default='float32'
+    )
+
     @command
     def add_remove_sky_matrix(self):
         return 'honeybee-radiance-postprocess post-process two-phase ' \
             'add-remove-sky-matrix "{{self.total_sky_matrix}}" ' \
             '"{{self.direct_sky_matrix}}" "{{self.sunlight_matrix}}"' \
+            '--{{self.dtype}}'
 
     total = Outputs.file(
         description='Total results as a npy file.', path='total.npy'
