@@ -33,7 +33,7 @@ class ProcessTwoPhase(Function):
     def process_two_phase(self):
         return 'honeybee-radiance-postprocess post-process two-phase ' \
             'rgb-to-illuminance "{{self.total_sky_matrix}}" ' \
-            '"{{self.direct_sky_matrix}}" "{{self.sunlight_matrix}}"' \
+            '"{{self.direct_sky_matrix}}" "{{self.sunlight_matrix}}" ' \
             '--{{self.dtype}}'
 
     total = Outputs.file(
@@ -76,7 +76,7 @@ class TwoPhaseAddRemoveSkyMatrix(Function):
     def add_remove_sky_matrix(self):
         return 'honeybee-radiance-postprocess post-process two-phase ' \
             'add-remove-sky-matrix "{{self.total_sky_matrix}}" ' \
-            '"{{self.direct_sky_matrix}}" "{{self.sunlight_matrix}}"' \
+            '"{{self.direct_sky_matrix}}" "{{self.sunlight_matrix}}" ' \
             '--{{self.dtype}}'
 
     total = Outputs.file(
