@@ -62,9 +62,20 @@ class WellAnnualDaylight(Function):
         path='well_summary/l01_well_summary.json'
     )
 
+    l01_ies_folder = Outputs.folder(
+        description='L01 IES LM folder.',
+        path='well_summary/ies_lm/l01_ies_lm_summary'
+    )
+
     l06_well_summary = Outputs.file(
         description='L06 WELL summary.',
         path='well_summary/l06_well_summary.json'
+    )
+
+
+    l06_ies_folder = Outputs.folder(
+        description='L06 IES LM folder.',
+        path='well_summary/ies_lm/l06_ies_lm_summary'
     )
 
 
