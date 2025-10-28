@@ -4,7 +4,7 @@ from pollination_dsl.function import Function, command, Inputs, Outputs
 
 @dataclass
 class WellAnnualDaylight(Function):
-    """Calculate credits for WELL L06 and L01."""
+    """Calculate credits for WELL L01 and L06."""
 
     folder = Inputs.folder(
         description='This folder is an output folder of annual daylight recipe. Folder '
