@@ -81,6 +81,14 @@ class AnnualDaylightEn17037Metrics(Function):
         path='schedule.txt'
     )
 
+    model = Inputs.file(
+        description='Path to HBJSON file. The purpose of the model in this function is '
+        'to use the mesh area of the sensor grids to calculate area-weighted metrics. '
+        'In case no model is provided or the sensor grids in the model do not have any '
+        'mesh area, it will be assumed that all sensor points cover the same area.',
+        path='model.hbjson', optional=True
+    )
+
     @command
     def calculate_annual_metrics_en17037(self):
         return 'honeybee-radiance-postprocess post-process annual-daylight-en17037 ' \
@@ -90,6 +98,14 @@ class AnnualDaylightEn17037Metrics(Function):
     annual_en17037_metrics = Outputs.folder(
         description='Annual EN 17037 metrics folder. This folder includes all the other '
         'subfolders which are also exposed as separate outputs.', path='metrics'
+    )
+
+    summary = Outputs.file(
+        description='Summary of whole model.', path='metrics/summary.json'
+    )
+
+    summary_grid = Outputs.file(
+        description='Summary of each sensor grid.', path='metrics/summary_grid.json'
     )
 
     daylight_autonomy = Outputs.folder(
